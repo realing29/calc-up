@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import { annualInflationList } from "./inflation.json";
-import { calculateInflation } from "./calculateInflationю";
+import { calculateInflation } from "./calculateInflation";
 
 type rowYearInflation = (typeof annualInflationList)[number];
 
