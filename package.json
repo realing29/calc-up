@@ -1,5 +1,5 @@
 {
-  "name": "vite-react-typescript-starter",
+  "name": "https://realing29.github.io/calc-up",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,7 +9,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "predeploy" : "npm run build",
-"deploy" : "gh-pages -d build"
+    "deploy" : "gh-pages -d build"
   },
   "dependencies": {
     "mobx": "^6.12.3",
