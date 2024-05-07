@@ -3,6 +3,10 @@ import "./App.css";
 import store from "./store";
 import style from "./style.module.scss";
 
+function toNumberStrOrVoidStr(any: any, fix: number = 2): string {
+  return any && +any ? (fix ? any.toFixed(fix) : any) : "";
+}
+
 function App() {
   return (
     <>
@@ -24,12 +28,12 @@ function App() {
               <td>
                 <input
                   type="number"
-                  value={salary ?? ""}
-                  placeholder={(+String(placeholder ?? "")).toFixed(0)}
+                  value={toNumberStrOrVoidStr(salary, 0)}
+                  placeholder={toNumberStrOrVoidStr(placeholder)}
                   onChange={({ target }) => store.setSalary(index, +target.value)}
                 />
               </td>
-              <th>{ratio?.toFixed?.(2)}</th>
+              <th>{toNumberStrOrVoidStr(ratio)}</th>
             </tr>
           ))}
         </tbody>
