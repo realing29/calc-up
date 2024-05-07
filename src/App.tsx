@@ -1,35 +1,41 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { observer } from "mobx-react-lite";
+import "./App.css";
+import store from "./store";
+import style from "./style.module.scss";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1>Прога позволяет увидеть во сколько раз ты вырос по ЗП с учетом инфляции</h1>
+      <table className={style.table}>
+        <thead>
+          <tr>
+            <th>Год</th>
+            <th>Инфляция %</th>
+            <th>ЗП</th>
+            <th>Соотношение</th>
+          </tr>
+        </thead>
+        <tbody>
+          {store.rows.map(({ rate, year, salary, placeholder, ratio }, index) => (
+            <tr key={index}>
+              <td>{year}</td>
+              <td>{rate.toFixed(2)}</td>
+              <td>
+                <input
+                  type="number"
+                  value={salary ?? ""}
+                  placeholder={(+String(placeholder ?? "")).toFixed(0)}
+                  onChange={({ target }) => store.setSalary(index, +target.value)}
+                />
+              </td>
+              <th>{ratio?.toFixed?.(2)}</th>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </>
-  )
+  );
 }
 
-export default App
+export default observer(App);
